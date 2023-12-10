@@ -1,0 +1,63 @@
+<div
+  #myModal
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" *ngIf="bookDetails">
+          Title : {{ bookDetails.title }}
+        </h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body" *ngIf="bookDetails">
+        <div class="container">
+          <div class="row">
+            <div class="col-4" *ngIf="bookDetails.isbn_10">
+              <img
+                [src]="
+                  'https://covers.openlibrary.org/b/isbn/' +
+                  bookDetails.isbn_10[0] +
+                  '-L.jpg'
+                "
+                class="img-fluid rounded-start"
+                style="height: 15em; width: 100%"
+              />
+            </div>
+            <div class="col">
+              <h3 style="font-weight: bold">Genres :</h3>
+              <p *ngIf="bookDetails.subjects">
+                {{ bookDetails.subjects[0] }},
+                {{
+                  bookDetails.subjects.length > 1
+                    ? bookDetails.subjects[1]
+                    : ""
+                }},
+                {{
+                  bookDetails.subjects.length > 2 ? bookDetails.subjects[2] : ""
+                }}
+              </p>
+              <p *ngIf="!bookDetails.subjects">Genres not available.</p>
+              <br />
+              <h3 style="font-weight: bold">Description :</h3>
+              <p *ngIf="bookDetails.description">
+                {{ bookDetails.description.value | slice : 0 : 500 }}
+                {{ bookDetails.description.value.length > 500 ? "..." : "" }}
+              </p>
+              <p *ngIf="!bookDetails.description">Description not available.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

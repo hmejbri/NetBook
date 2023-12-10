@@ -1,0 +1,72 @@
+<!-- book-list.component.html -->
+
+<div class="book-display-card">
+  <!-- Book display content goes here -->
+  <div class="book-list">
+    <div class="book-item" *ngFor="let book of this.booksData">
+      <div class="card mb-3" style="height: 13em">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              *ngIf="book.isbn"
+              [src]="
+                'https://covers.openlibrary.org/b/isbn/' + book.isbn + '-L.jpg'
+              "
+              class="img-fluid rounded-start"
+              style="height: 13em; width: 80%"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h5 class="card-text" *ngIf="book.title">
+                Title : {{ book.title }}
+              </h5>
+              <p class="card-title" *ngIf="book.author">
+                Author : {{ book.author }}
+              </p>
+              <p
+                class="card-text"
+                *ngIf="book.subject && book.subject.length > 0"
+              >
+                <small class="text-body-secondary">
+                  Genres: {{ book.subject[0] }},
+                  {{ book.subject.length > 1 ? book.subject[1] : "" }},
+                  {{ book.subject.length > 2 ? book.subject[2] : "" }}
+                </small>
+                >
+              </p>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <span
+              [ngClass]="{
+                'badge rounded-pill text-bg-warning': book.status === 'Ongoing',
+                'badge rounded-pill text-bg-success':
+                  book.status !== 'In progress'
+              }"
+              style="
+                text-align: center;
+                display: block;
+                width: 80%;
+                margin-top: 2em;
+              "
+              >{{ book.status }}</span
+            >
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+              style="height: 20%; width: 80%; margin-bottom: -12em"
+              (click)="selectBook(book.isbn)"
+            >
+              Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-details-modal [selectedBook]="selectedBook"></app-details-modal>
