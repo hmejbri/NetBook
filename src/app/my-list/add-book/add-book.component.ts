@@ -1,8 +1,13 @@
+// add-book.component.ts
 import { Component, Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { MyListServiceService } from 'src/app/my-list-service.service';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -14,10 +19,6 @@ interface IBook {
   isbn: string;
   author_name: string;
   subject: [];
-}
-
-interface ISearchBook {
-  docs: [];
 }
 
 @Component({
@@ -35,15 +36,11 @@ export class AddBookComponent {
   filteredBooks: any[] = [];
   selectedBook: IBook = { title: '', isbn: '', author_name: '', subject: [] };
 
-  getBooks(searchValue: string): Observable<ISearchBook> {
-    return this.http.get<ISearchBook>(
-      'https://openlibrary.org/search.json?q=' +
-        searchValue +
-        '&limit=5&fields=isbn,title,author_name,subject'
-    );
-  }
-
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private bookService: MyListServiceService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
     this.formGroup = new FormGroup({
       selectedBook: new FormControl<object | null>(null),
     });
@@ -51,11 +48,15 @@ export class AddBookComponent {
 
   ngOnInit() {
     this.books = [];
+    this.formGroup = this.formBuilder.group({
+      selectedBook: ['', Validators.required],
+      status: ['', Validators.required],
+    });
   }
 
   filterCountry(event: AutoCompleteCompleteEvent) {
     let query = event.query;
-    this.getBooks(query).subscribe(
+    this.bookService.searchBooks(query).subscribe(
       (data) => {
         this.filteredBooks = data.docs;
       },
@@ -72,14 +73,17 @@ export class AddBookComponent {
   }
 
   addBook() {
-    const newBook = {
-      title: this.selectedBook.title,
-      isbn: this.selectedBook.isbn[0],
-      author: this.selectedBook.author_name[0],
-      subject: this.selectedBook.subject,
-      status: this.status,
-    };
-    this.http.post('http://localhost:3000/books', newBook).subscribe();
-    this.refreshPage();
+    if (this.formGroup.valid) {
+      const newBook = {
+        title: this.formGroup.value.selectedBook.title,
+        isbn: this.formGroup.value.selectedBook.isbn[0],
+        author: this.formGroup.value.selectedBook.author_name[0],
+        subject: this.formGroup.value.selectedBook.subject,
+        status: this.formGroup.value.status,
+      };
+
+      this.bookService.addBook(newBook);
+      this.refreshPage();
+    }
   }
 }

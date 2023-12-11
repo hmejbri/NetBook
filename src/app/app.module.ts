@@ -4,12 +4,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-4;
 import { HttpClientModule } from '@angular/common/http';
 import { MyListModule } from './my-list/my-list.module';
+import { NavbarComponent } from './navbar/navbar.component';
+import { QuoteModule } from './quote/quote.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -17,6 +18,7 @@ import { MyListModule } from './my-list/my-list.module';
     BrowserAnimationsModule,
     HttpClientModule,
     MyListModule,
+    QuoteModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

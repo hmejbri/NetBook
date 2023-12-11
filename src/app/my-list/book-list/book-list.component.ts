@@ -1,33 +1,24 @@
-import { Component } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+// book-list.component.ts
+import { Component, OnInit } from '@angular/core';
+import { MyListServiceService } from 'src/app/my-list-service.service';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss'],
 })
-@Injectable({
-  providedIn: 'root',
-})
-export class BookListComponent {
-  private booksAPI = 'http://localhost:3000/books';
+export class BookListComponent implements OnInit {
   booksData: any[] = [];
   selectedBook: string = '';
 
-  constructor(private http: HttpClient) {}
-
-  getBooks(): Observable<any[]> {
-    return this.http.get<any[]>(this.booksAPI);
-  }
+  constructor(private bookService: MyListServiceService) {}
 
   selectBook(isbn: string) {
     this.selectedBook = isbn;
   }
 
   ngOnInit() {
-    this.getBooks().subscribe(
+    this.bookService.getBooks().subscribe(
       (data) => {
         this.booksData = data.reverse();
       },

@@ -28,6 +28,7 @@
           aria-label="Default select example"
           [(ngModel)]="status"
           [style]="{ height: '100%' }"
+          required
         >
           <option selected disabled>Status</option>
           <option value="Completed">Completed</option>
@@ -35,7 +36,8 @@
         </select>
       </div>
     </div>
+
+    <br />
+    <button class="btn btn-primary" (click)="addBook()">Add to My List</button>
   </div>
-  <br />
-  <button class="btn btn-primary" (click)="addBook()">Add to My List</button>
 </div>

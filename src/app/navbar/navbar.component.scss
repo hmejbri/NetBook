@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.4); /* Transparent background */
+  color: #fff; /* Text color */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000; /* Ensure the navbar is above other content */
+
+  .navbar-items {
+    a.active {
+      color: #e74c3c; // Change color for active item
+      // Add any additional styles for the active item
+    }
+  }
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-items {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-items a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.navbar-items a:hover {
+  color: #e74c3c; /* Change color on hover */
+}

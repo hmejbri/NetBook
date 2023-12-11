@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DetailsModalComponent } from '../details-modal/details-modal.component';
+import { MyListServiceService } from '../my-list-service.service';
 
 @NgModule({
   declarations: [
@@ -22,5 +23,6 @@ import { DetailsModalComponent } from '../details-modal/details-modal.component'
     DropdownModule,
     AutoCompleteModule,
   ],
+  providers: [MyListServiceService],
 })
 export class MyListModule {}

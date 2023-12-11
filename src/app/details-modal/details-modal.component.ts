@@ -6,53 +6,31 @@ import {
   ElementRef,
   Renderer2,
 } from '@angular/core';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-interface IBookKey {
-  key: string;
-}
-
-interface IBookDetails {
-  title: string;
-}
+import { MyListServiceService } from '../my-list-service.service';
+import { IBookDetails } from '../my-list/book.model';
 
 @Component({
   selector: 'app-details-modal',
   templateUrl: './details-modal.component.html',
   styleUrls: ['./details-modal.component.scss'],
 })
-@Injectable({
-  providedIn: 'root',
-})
 export class DetailsModalComponent implements OnChanges {
   @Input() selectedBook: any;
   @ViewChild('myModal') myModal!: ElementRef;
-  bookDetails: any;
+  bookDetails: IBookDetails | undefined;
 
-  constructor(private http: HttpClient, private renderer: Renderer2) {}
-
-  get_Book_Key(): Observable<IBookKey> {
-    return this.http.get<IBookKey>(
-      'https://openlibrary.org/isbn/' + this.selectedBook + '.json'
-    );
-  }
-
-  get_Book_details(key: string): Observable<IBookDetails> {
-    return this.http.get<IBookDetails>(
-      'https://openlibrary.org/books/' + key + '.json?details=true'
-    );
-  }
+  constructor(
+    private bookService: MyListServiceService,
+    private renderer: Renderer2
+  ) {}
 
   ngOnChanges(): void {
     if (this.selectedBook) {
-      this.get_Book_Key().subscribe(
-        (data: IBookKey) => {
+      this.bookService.getBookKey(this.selectedBook).subscribe(
+        (data) => {
           const parts = data.key.split('/books/');
-
-          this.get_Book_details(parts[1]).subscribe(
-            (detailsData: IBookDetails) => {
+          this.bookService.getBookDetails(parts[1]).subscribe(
+            (detailsData) => {
               this.bookDetails = detailsData;
             },
             (error) => {
@@ -70,7 +48,7 @@ export class DetailsModalComponent implements OnChanges {
   ngAfterViewInit() {
     // Add event listener for Bootstrap modal hidden event
     this.renderer.listen(this.myModal.nativeElement, 'hidden.bs.modal', () => {
-      this.bookDetails = '';
+      this.bookDetails = undefined;
     });
   }
 }
