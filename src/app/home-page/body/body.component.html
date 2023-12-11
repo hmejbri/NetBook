@@ -1,0 +1,10 @@
+<p>body works!</p>
+<div class="body-card">
+  <div class="container-fluid">
+    <div class="books-by-genre" *ngFor="let g of this.genres">
+      <!-- Book display content goes here  see book-list.html -->
+      <app-books-by-genre [genre]="g"></app-books-by-genre>
+      <br />
+    </div>
+  </div>
+</div>

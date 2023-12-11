@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MyListComponent } from './my-list/my-list.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { BookListComponent } from './book-list/book-list.component';
+import { HomePageModule } from './home-page/home-page.module';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,10 @@ import { BookListComponent } from './book-list/book-list.component';
     NavbarComponent,
     MyListComponent,
     AddBookComponent,
-    BookListComponent
+    BookListComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HomePageModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

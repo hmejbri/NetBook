@@ -1,0 +1,11 @@
+.background_img {
+  background: url("https://images.alphacoders.com/132/1326370.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
