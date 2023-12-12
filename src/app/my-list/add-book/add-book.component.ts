@@ -1,46 +1,24 @@
-// add-book.component.ts
-import { Component, Injectable } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyListServiceService } from 'src/app/my-list-service.service';
 import { AutoCompleteCompleteEvent, IBook } from '../book.model';
+
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
   styleUrls: ['./add-book.component.scss'],
 })
-@Injectable({
-  providedIn: 'root',
-})
 export class AddBookComponent {
   status: string = 'Status';
   books: any[] | undefined;
-  formGroup: FormGroup;
   filteredBooks: any[] = [];
   selectedBook: IBook = { title: '', isbn: '', author_name: '', subject: [] };
 
   constructor(
     private bookService: MyListServiceService,
-    private router: Router,
-    private formBuilder: FormBuilder
-  ) {
-    this.formGroup = new FormGroup({
-      selectedBook: new FormControl<object | null>(null),
-    });
-  }
-
-  ngOnInit() {
-    this.books = [];
-    this.formGroup = this.formBuilder.group({
-      selectedBook: ['', Validators.required],
-      status: ['', Validators.required],
-    });
-  }
+    private router: Router
+  ) {}
 
   filterBook(event: AutoCompleteCompleteEvent) {
     let query = event.query;
@@ -62,10 +40,10 @@ export class AddBookComponent {
 
   addBook() {
     const newBook = {
-      title: this.formGroup.value.selectedBook.title,
-      isbn: this.formGroup.value.selectedBook.isbn[0],
-      author: this.formGroup.value.selectedBook.author_name[0],
-      subject: this.formGroup.value.selectedBook.subject,
+      title: this.selectedBook.title,
+      isbn: this.selectedBook.isbn[0],
+      author: this.selectedBook.author_name[0],
+      subject: this.selectedBook.subject,
       status: this.status,
     };
     this.bookService.addBook(newBook);

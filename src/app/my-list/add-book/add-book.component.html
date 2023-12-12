@@ -3,12 +3,12 @@
 </div>
 <br />
 <div class="add-book-card">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <form [formGroup]="formGroup">
+  <form #f="ngForm" (ngSubmit)="addBook()">
+    <div class="container">
+      <div class="row">
+        <div class="col">
           <p-autoComplete
-            formControlName="selectedBook"
+            name="selectedBook"
             [(ngModel)]="selectedBook"
             [suggestions]="filteredBooks"
             (completeMethod)="filterBook($event)"
@@ -20,23 +20,27 @@
             [inputStyle]="{ width: '100%' }"
             class="p-autocomplete"
           ></p-autoComplete>
-        </form>
+        </div>
+        <div class="col">
+          <select
+            name="status"
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="status"
+            [style]="{ height: '100%' }"
+            required
+          >
+            <option selected disabled>Status</option>
+            <option value="Completed">Completed</option>
+            <option value="Ongoing">Ongoing</option>
+          </select>
+        </div>
       </div>
-      <div class="col">
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          [(ngModel)]="status"
-          [style]="{ height: '100%' }"
-        >
-          <option selected disabled>Status</option>
-          <option value="Completed">Completed</option>
-          <option value="Ongoing">Ongoing</option>
-        </select>
-      </div>
-    </div>
 
-    <br />
-    <button class="btn btn-primary" (click)="addBook()">Add to My List</button>
-  </div>
+      <br />
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
+        Add to My List
+      </button>
+    </div>
+  </form>
 </div>

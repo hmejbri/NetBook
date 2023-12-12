@@ -23,7 +23,6 @@ export class BooksByGenreComponent {
   }
 
   sendDataToParent(isbn: string) {
-    console.log(isbn);
     this.dataToParent.emit(isbn);
   }
 }
