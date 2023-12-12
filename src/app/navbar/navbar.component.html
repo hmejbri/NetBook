@@ -1,7 +1,12 @@
 <nav class="navbar">
   <div class="brand">NetBook</div>
   <div class="navbar-items">
-    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
     <a routerLink="/my-list" routerLinkActive="active">My List</a>
   </div>
 </nav>

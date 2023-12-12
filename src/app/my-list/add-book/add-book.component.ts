@@ -8,19 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MyListServiceService } from 'src/app/my-list-service.service';
-
-interface AutoCompleteCompleteEvent {
-  originalEvent: Event;
-  query: string;
-}
-
-interface IBook {
-  title: string;
-  isbn: string;
-  author_name: string;
-  subject: [];
-}
-
+import { AutoCompleteCompleteEvent, IBook } from '../book.model';
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -73,17 +61,14 @@ export class AddBookComponent {
   }
 
   addBook() {
-    if (this.formGroup.valid) {
-      const newBook = {
-        title: this.formGroup.value.selectedBook.title,
-        isbn: this.formGroup.value.selectedBook.isbn[0],
-        author: this.formGroup.value.selectedBook.author_name[0],
-        subject: this.formGroup.value.selectedBook.subject,
-        status: this.formGroup.value.status,
-      };
-
-      this.bookService.addBook(newBook);
-      this.refreshPage();
-    }
+    const newBook = {
+      title: this.formGroup.value.selectedBook.title,
+      isbn: this.formGroup.value.selectedBook.isbn[0],
+      author: this.formGroup.value.selectedBook.author_name[0],
+      subject: this.formGroup.value.selectedBook.subject,
+      status: this.status,
+    };
+    this.bookService.addBook(newBook);
+    this.refreshPage();
   }
 }

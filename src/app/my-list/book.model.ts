@@ -12,3 +12,15 @@ export interface ISearchBook {
 export interface IBookKey {
   key: string;
 }
+
+export interface AutoCompleteCompleteEvent {
+  originalEvent: Event;
+  query: string;
+}
+
+export interface IBook {
+  title: string;
+  isbn: string;
+  author_name: string;
+  subject: [];
+}

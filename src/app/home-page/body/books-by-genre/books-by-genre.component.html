@@ -1,0 +1,39 @@
+<div classe="carte">
+  <div class="card">
+    <h3 class="card-header">{{ genre }}</h3>
+    <div class="card-body">
+      <div class="scrollable-list">
+        <div class="scrolling-wrapper">
+          <div class="book-card" *ngFor="let book of books">
+            <div class="card" style="width: 18rem">
+              <img
+                class="card-img-top"
+                [src]="
+                  'https://covers.openlibrary.org/b/isbn/' +
+                  book.availability.isbn +
+                  '-L.jpg'
+                "
+                alt="Card image cap"
+                style="height: 20rem"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal"
+                  style="height: 20%; width: 100%"
+                  (click)="sendDataToParent(book.availability.isbn)"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,22 +6,18 @@ import { BookListComponent } from './book-list/book-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { DetailsModalComponent } from '../details-modal/details-modal.component';
+import { DetailsModalModule } from '../details-modal/details-modal.module';
 import { MyListServiceService } from '../my-list-service.service';
 
 @NgModule({
-  declarations: [
-    MyListComponent,
-    AddBookComponent,
-    BookListComponent,
-    DetailsModalComponent,
-  ],
+  declarations: [MyListComponent, AddBookComponent, BookListComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DropdownModule,
     AutoCompleteModule,
+    DetailsModalModule,
   ],
   providers: [MyListServiceService],
 })

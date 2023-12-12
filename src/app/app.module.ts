@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MyListModule } from './my-list/my-list.module';
+import { HomePageModule } from './home-page/home-page.module';
+import { DetailsModalModule } from './details-modal/details-modal.module';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -17,6 +19,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MyListModule,
+    HomePageModule,
+    DetailsModalModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -29,6 +29,7 @@ export class DetailsModalComponent implements OnChanges {
       this.bookService.getBookKey(this.selectedBook).subscribe(
         (data) => {
           const parts = data.key.split('/books/');
+
           this.bookService.getBookDetails(parts[1]).subscribe(
             (detailsData) => {
               this.bookDetails = detailsData;

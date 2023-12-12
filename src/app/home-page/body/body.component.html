@@ -1,0 +1,15 @@
+<div class="b-card">
+  <div class="container-fluid" class="conteneur">
+    <div *ngFor="let g of this.genres">
+      <!-- Book display content goes here  see book-list.html -->
+      <app-books-by-genre
+        [genre]="g"
+        class="books-by-genre"
+        (dataToParent)="receiveDataFromChild($event)"
+      ></app-books-by-genre>
+      <br />
+    </div>
+  </div>
+</div>
+
+<app-details-modal [selectedBook]="selectedBook"></app-details-modal>
