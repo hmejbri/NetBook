@@ -1,24 +1,101 @@
-<div class="card">
+<!--<div class="card">
   <h5 class="card-header">{{ genre }}</h5>
   <div class="card-body">
     <div class="scrollable-list">
-      <div class="scrolling-wrapper">
+      <div class="scrolling-wrapper" *ngFor="let book of books">
         <div class="book-card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
+          <img class="card-img-top" src="{{" src }} alt="Card image cap" />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">{{ title }}</h5>
             <p class="card-text">
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            </p> 
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+              style="height: 20%; width: 80%; margin-bottom: -12em"
+              (click)="selectBook(isbn)"
+            >
+              Details
+            </button>
           </div>
         </div>
 
-        <!-- Add more items as needed -->
+    
       </div>
     </div>
   </div>
 </div>
+-->
+<div classe="carte">
+  <div class="card">
+    <h3 class="card-header">{{ genre }}</h3>
+    <div class="card-body">
+      <div class="scrollable-list">
+        <div class="scrolling-wrapper" *ngFor="let book of books">
+          <div class="book-card">
+            <div class="card" style="width: 18rem">
+              <img
+                class="card-img-top"
+                [src]="
+                  'https://covers.openlibrary.org/b/isbn/' +
+                  book.availability.isbn +
+                  '-L.jpg'
+                "
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
 
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#myModal"
+                  style="height: 20%; width: 80%; margin-bottom: -12em"
+                  (click)="selectBook(book.availability.isbn)"
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-details-modal [selectedBook]="selectedBook"></app-details-modal>
 <!--Next horizontal list-->
+
+<!--
+*ngFor="let book of books"
+
+<div class="card" style="width: 18rem">
+  <img
+    class="card-img-top"
+    [src]="
+      'https://covers.openlibrary.org/b/isbn/' +
+      book.availability.isbn +
+      '-L.jpg'
+    "
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ book.title }}</h5>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#myModal"
+      style="height: 20%; width: 80%; margin-bottom: -12em"
+      (click)="selectBook(book.availability.isbn)"
+    >
+      Details
+    </button>
+  </div>
+</div> -->
