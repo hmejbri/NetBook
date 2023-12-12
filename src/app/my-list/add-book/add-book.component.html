@@ -11,7 +11,7 @@
             formControlName="selectedBook"
             [(ngModel)]="selectedBook"
             [suggestions]="filteredBooks"
-            (completeMethod)="filterCountry($event)"
+            (completeMethod)="filterBook($event)"
             field="title"
             placeholder="Book name"
             id="autoComplete"

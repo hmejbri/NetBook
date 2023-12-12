@@ -54,7 +54,7 @@ export class AddBookComponent {
     });
   }
 
-  filterCountry(event: AutoCompleteCompleteEvent) {
+  filterBook(event: AutoCompleteCompleteEvent) {
     let query = event.query;
     this.bookService.searchBooks(query).subscribe(
       (data) => {

@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MyListModule } from './my-list/my-list.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { QuoteModule } from './quote/quote.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -18,7 +17,6 @@ import { QuoteModule } from './quote/quote.module';
     BrowserAnimationsModule,
     HttpClientModule,
     MyListModule,
-    QuoteModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
